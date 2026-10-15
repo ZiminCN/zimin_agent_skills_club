@@ -4,3 +4,7 @@ Thumbs.db
 .skills-manager.lock
 __pycache__/
 *.pyc
+
+# skills-manager: oversized skills excluded from backup (auto-managed)
+/claude_ws/zettaranc-skill/
+# skills-manager: end oversized skills

@@ -1,0 +1,109 @@
+
+mainmenu "Diablo Cerebellum"
+
+config DDT_DEVELOPER_MODE
+    bool "Developer Mode"
+    default n
+
+config DDT_LOCOMOTION_SEPARATE_THREAD
+    bool "Locomotion separate thread"
+    default n
+
+config DDT_TELEMETRY_RC_ASYNC_UART
+    bool "Remote control using async uart"
+    default y
+
+config DDT_LEG_CTRL_DRY_RUN
+    bool "Leg controller dry run"
+    default n
+
+config DDT_DIRECT_VOLTAGE_SAMPLING
+    bool "ADC direct sampling voltage of battery"
+    default n
+
+config DDT_A1_SERIES_BATTERY_PROTOCOL
+    bool "A1 series battery protocol"
+    default n
+
+config DDT_ROBOT_API_ACM
+    bool "USB-ACM protocol"
+    default n
+
+config DDT_ROBOT_API_CANFD
+    bool "CAN-FD protocol"
+    default n
+
+config DDT_CANFD_USE_FIXED_POINT
+    bool "CAN-FD use fixed-point format for motor data"
+    default n
+    depends on DDT_ROBOT_API_CANFD
+
+config DDT_LEGACY_ATTITUDE_ALG
+    bool "legacy attitude algorithm"
+    default n
+
+config TITA_LIGHTCONTROL_FUNC
+    bool "Tita LightControl Func"
+    default n
+
+choice DIABLO_DOF
+    prompt "Diablo DoF model"
+
+config DIABLO_EIGHT_DOF
+    bool "Diablo 8 Dof model"
+
+config DIABLO_SIX_DOF
+    bool "Diablo 6 Dof model"
+
+endchoice
+
+
+# Diablo robot target
+choice DIABLO_ROBOT
+    prompt "Diablo target"
+    default DIABLO_STUB_LOCOMOTION
+
+config DIABLO_A2_SERIES_LOCOMOTION
+    bool "Diablo A2 Series"
+    select DIABLO_CONTROL_A2V2
+    select DDT_ROBOT_API_CANFD
+    # select TITA_LIGHTCONTROL_FUNC
+
+config DIABLO_A1_SERIES_LOCOMOTION
+    bool "Diablo A1 Series"
+    select DIABLO_CONTROL
+    select DDT_ROBOT_API_ACM
+
+config DIABLO_STUB_LOCOMOTION
+    bool "Diablo Stub Control"
+
+endchoice
+
+
+if DIABLO_A2_SERIES_LOCOMOTION
+
+choice DIABLO_DOF
+    default DIABLO_EIGHT_DOF
+endchoice
+
+endif
+
+
+if DIABLO_A1_SERIES_LOCOMOTION
+
+choice DIABLO_DOF
+    default DIABLO_SIX_DOF
+endchoice
+
+endif
+
+
+if DIABLO_STUB_LOCOMOTION
+
+choice DIABLO_DOF
+    default DIABLO_EIGHT_DOF
+endchoice
+
+endif
+
+source "Kconfig.zephyr"

@@ -1,0 +1,6 @@
+*.mp3
+*.raw
+*.o
+convert
+__pycache__/
+build/

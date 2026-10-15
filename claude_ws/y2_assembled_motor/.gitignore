@@ -1,0 +1,34 @@
+﻿# 编译产物
+build/
+*.o
+*.d
+*.lst
+*.map
+
+# 生成的二进制文件
+*.elf
+*.hex
+*.bin
+*.axf
+
+# STM32CubeIDE生成的文件
+.mxproject
+*.ioc
+.project
+.cproject
+.settings/
+
+# IDE配置（根据需要保留或删除）
+.vscode/
+*.launch
+
+# 临时文件
+*.tmp
+*.bak
+*~
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db

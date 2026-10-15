@@ -1,0 +1,10 @@
+# Kernel module Makefile for g_bulk
+# 在 Jetson 上使用
+#
+# 编译:
+#   make -C /lib/modules/$(uname -r)/build M=$(PWD) -f Makefile.kernel modules
+#
+# 清理:
+#   make -C /lib/modules/$(uname -r)/build M=$(PWD) -f Makefile.kernel clean
+
+obj-m += g_bulk.o
